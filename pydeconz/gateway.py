@@ -8,6 +8,7 @@ import aiohttp
 
 from .alarm_system import RESOURCE_TYPE as ALARM_SYSTEM_RESOURCE, AlarmSystems
 from .config import RESOURCE_TYPE as CONFIG_RESOURCE, Config
+from .device import Devices
 from .errors import RequestError, ResponseError, raise_error
 from .group import RESOURCE_TYPE as GROUP_RESOURCE, DeconzScene, Groups
 from .light import RESOURCE_TYPE as LIGHT_RESOURCE, Light, Lights
@@ -64,6 +65,7 @@ class DeconzSession:
 
         self.alarmsystems = AlarmSystems({}, self.request)
         self.config: Optional[Config] = None
+        self.devices = Devices({}, self.request)
         self.groups = Groups({}, self.request)
         self.lights = Lights({}, self.request)
         self.scenes: Dict[str, DeconzScene] = {}
