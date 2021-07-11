@@ -8,6 +8,13 @@ from .deconz_device import DeconzDevice
 RESOURCE_TYPE = "lights"
 URL = "/lights"
 
+# Bit field of features supported by a light device
+COLOR_CAPABILITY_HUE_SATURATION_SUPPORTED = 0
+COLOR_CAPABILITY_ENHANCED_HUE_SUPPORTED = 1
+COLOR_CAPABILITY_COLOR_LOOP_SUPPORTED = 2
+COLOR_CAPABILITY_XY_ATTRIBUTES_SUPPORTED = 4
+COLOR_CAPABILITY_COLOR_TEMPERATURE_SUPPORTED = 8
+
 ALERT_KEY = "alert"
 ALERT_LONG = "lselect"
 ALERT_NONE = "none"
@@ -70,6 +77,20 @@ class Light(DeconzLight):
     Dresden Elektroniks documentation of lights in deCONZ
     http://dresden-elektronik.github.io/deconz-rest-doc/lights/
     """
+
+    @property
+    def color_capabilities(self) -> Optional[int]:
+        """Bit field to specify color capabilities of light.
+
+        If a bit is set to 0, the corresponding attributes are not supported.
+        Following positions are supported:
+        0 - Hue/saturation supported
+        1 - Enhanced hue support
+        2 - Color loop supported
+        3 - XY attributes supported
+        4 - Color temperature supported
+        """
+        return self.raw.get("colorcapabilities")
 
     @property
     def alert(self) -> Optional[str]:
