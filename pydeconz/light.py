@@ -12,7 +12,7 @@ from typing import (
     Union,
 )
 
-from .api import APIItems
+from .api import APIItems, JsonBlobType, JsonDictType
 from .deconz_device import DeconzDevice
 
 RESOURCE_TYPE: Final = "lights"
@@ -42,7 +42,7 @@ class Lights(APIItems):
 
     def __init__(
         self,
-        raw: dict,
+        raw: JsonBlobType,
         request: Callable[..., Awaitable[Dict[str, Any]]],
     ) -> None:
         """Initialize light manager."""
@@ -421,7 +421,7 @@ NON_LIGHT_CLASSES = (ConfigurationTool, Cover, Fan, Lock, Siren)
 
 def create_light(
     light_id: str,
-    raw: dict,
+    raw: JsonDictType,
     request: Callable[..., Awaitable[Dict[str, Any]]],
 ) -> DeconzLight:
     # ) -> Union[Light, ConfigurationTool, Cover, Fan, Lock, Siren]:

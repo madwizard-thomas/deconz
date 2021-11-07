@@ -1,5 +1,4 @@
 """Python library to connect deCONZ and Home Assistant to work together."""
-
 from typing import (
     Any,
     Awaitable,
@@ -10,10 +9,9 @@ from typing import (
     Literal,
     Optional,
     Tuple,
-    Union,
 )
 
-from .api import APIItems
+from .api import APIItems, DataDictType, JsonBlobType
 from .deconz_device import DeconzDevice
 from .light import Light
 
@@ -37,7 +35,7 @@ class Groups(APIItems):
 
     def __init__(
         self,
-        raw: dict,
+        raw: JsonBlobType,
         request: Callable[..., Awaitable[Dict[str, Any]]],
     ) -> None:
         """Initialize group manager."""
@@ -301,7 +299,7 @@ class DeconzGroup(DeconzDevice):
         write light attributes with the value None to the group.
         This is used to not keep any bad values from the group.
         """
-        data: Dict[str, Union[float, int, str, tuple, None]] = {}
+        data: DataDictType = {}
 
         for group_key, light_attribute_key in GROUP_TO_LIGHT_ATTRIBUTES.items():
             light_attribute = getattr(light, light_attribute_key)

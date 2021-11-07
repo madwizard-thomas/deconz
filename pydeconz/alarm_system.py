@@ -2,7 +2,7 @@
 
 from typing import Any, Awaitable, Callable, Dict, Final, Literal, Optional
 
-from .api import APIItem, APIItems
+from .api import APIItem, APIItems, JsonBlobType
 
 RESOURCE_TYPE: Final = "alarmsystems"
 URL: Final = "/alarmsystems"
@@ -41,7 +41,7 @@ class AlarmSystems(APIItems):
 
     def __init__(
         self,
-        raw: dict,
+        raw: JsonBlobType,
         request: Callable[..., Awaitable[Dict[str, Any]]],
     ) -> None:
         """Initialize alarm system manager."""
