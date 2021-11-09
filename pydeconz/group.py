@@ -1,15 +1,5 @@
 """Python library to connect deCONZ and Home Assistant to work together."""
-from typing import (
-    Any,
-    Awaitable,
-    Callable,
-    Dict,
-    Final,
-    List,
-    Literal,
-    Optional,
-    Tuple,
-)
+from typing import Any, Awaitable, Callable, Dict, Final, List, Literal, Optional, Tuple
 
 from .api import APIItems, DataDictType, JsonBlobType
 from .deconz_device import DeconzDevice
@@ -140,7 +130,7 @@ class DeconzGroup(DeconzDevice):
         return self.raw["action"].get("effect")
 
     @property
-    def reachable(self) -> Optional[bool]:
+    def reachable(self) -> bool:
         """Is group reachable."""
         return True
 
